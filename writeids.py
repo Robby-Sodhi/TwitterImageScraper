@@ -17,7 +17,7 @@ def getLastMasterIdDate():
 
 def getTwitterIds(auth, search, EndDate, StartDate=201101012315):
     api = tweepy.API(auth)
-    """
+    
     tweepySearch = tweepy.Cursor(api.search_full_archive,
     environment_name = "development",
     query = search,
@@ -25,8 +25,8 @@ def getTwitterIds(auth, search, EndDate, StartDate=201101012315):
     fromDate = StartDate,
     toDate=EndDate
     ).items(1000)
-    """
-    tweepySearch = tweepy.Cursor(api.search, q=search, count=100).items(1000)
+
+    #tweepySearch = tweepy.Cursor(api.search, q=search, count=100).items(1000)
     ran = False
     TweetData = {}
     for tweet in tweepySearch:

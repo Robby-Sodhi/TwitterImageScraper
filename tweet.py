@@ -31,15 +31,17 @@ class Tweet():
     def randomTweet(self, type=None):
         isTypeImage = (type == "image")
         while True:
-            self._tweets = readMasterId()
-            self._tweetId = random.choice(list(self._tweets.values()))
             if isMasterIdEmpty():
                 getTwitterIds(self._auth, self._search_query, EndDate=today())
                 continue
             elif isAllUsed():
                 getTwitterIds(self._auth, self._search_query, EndDate=getLastMasterIdDate())
                 continue
-            elif (isIdUsed(self._tweetId)):
+
+            self._tweets = readMasterId()
+            self._tweetId = random.choice(list(self._tweets.values()))
+            
+            if (isIdUsed(self._tweetId)):
                 appendId(self._tweetId)
                 continue
             else:

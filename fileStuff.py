@@ -17,8 +17,9 @@ def readMasterId():
 
 def isMasterIdEmpty():
     data = readMasterId()
-    if len(data) < 0:
+    if len(data) <= 0:
         return True
+    return False
 
 def writeMasterIds(data):
     checkFile(masterIdList)
