@@ -4,3 +4,5 @@ usedIds.json
 __pycache__/
 main.py
 log.txt
+singBot/
+activate.Bat - Shortcut.lnk
