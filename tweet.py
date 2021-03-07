@@ -40,9 +40,8 @@ class Tweet():
 
             self._tweets = readMasterId()
             self._tweetId = random.choice(list(self._tweets.values()))
-            
+
             if (isIdUsed(self._tweetId)):
-                appendId(self._tweetId)
                 continue
             else:
                 try:
