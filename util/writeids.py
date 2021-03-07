@@ -1,6 +1,8 @@
 import tweepy
 import datetime
-from fileStuff import writeMasterIds, readMasterId
+
+import util
+#from fileStuff import writeMasterIds, readMasterId
 
 
 def parseDate(date):
@@ -17,7 +19,7 @@ def getLastMasterIdDate():
 
 def getTwitterIds(auth, search, EndDate, StartDate=201101012315):
     api = tweepy.API(auth)
-    
+
     tweepySearch = tweepy.Cursor(api.search_full_archive,
     environment_name = "development",
     query = search,

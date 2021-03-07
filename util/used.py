@@ -1,12 +1,12 @@
 import json
-from fileStuff import checkFile, readMasterId
-
+#from fileStuff import checkFile, readMasterId
+import util
 usedIdMasterList = "usedIds.json"
 
 
 
 def readUsedIdMasterList():
-    checkFile(usedIdMasterList)
+    util.fileStuff.checkFile(usedIdMasterList)
     with open(usedIdMasterList, "r") as f:
         data = json.loads(f.read())
         return data
@@ -17,7 +17,7 @@ def isIdUsed(id):
         return False
 def isAllUsed():
     usedIds = readUsedIdMasterList()
-    masterIdList = readMasterId()
+    masterIdList = util.fileStuff.readMasterId()
     if set(masterIdList.values()).issubset(set(usedIds)):
         return True
     return False

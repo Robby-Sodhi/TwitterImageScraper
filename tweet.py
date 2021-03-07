@@ -1,7 +1,9 @@
-from fileStuff import readMasterId, isMasterIdEmpty
-from Used import isIdUsed, isAllUsed, appendId
-from writeids import getTwitterIds, today, getLastMasterIdDate
-from parseTweet import getTweetAuthor, getTweetMedia, getTweetText
+import util
+
+#from fileStuff import readMasterId, isMasterIdEmpty
+#from Used import isIdUsed, isAllUsed, appendId
+#from writeids import getTwitterIds, today, getLastMasterIdDate
+#from parseTweet import getTweetAuthor, getTweetMedia, getTweetText
 
 import tweepy
 import random
@@ -31,31 +33,31 @@ class Tweet():
     def randomTweet(self, type=None):
         isTypeImage = (type == "image")
         while True:
-            if isMasterIdEmpty():
-                getTwitterIds(self._auth, self._search_query, EndDate=today())
+            if util.fileStuff.isMasterIdEmpty():
+                util.writeids.getTwitterIds(self._auth, self._search_query, EndDate=today())
                 continue
-            elif isAllUsed():
-                getTwitterIds(self._auth, self._search_query, EndDate=getLastMasterIdDate())
+            elif util.used.isAllUsed():
+                util.writeids.getTwitterIds(self._auth, self._search_query, EndDate=getLastMasterIdDate())
                 continue
 
-            self._tweets = readMasterId()
+            self._tweets = util.fileStuff.readMasterId()
             self._tweetId = random.choice(list(self._tweets.values()))
 
-            if (isIdUsed(self._tweetId)):
+            if (util.used.isIdUsed(self._tweetId)):
                 continue
             else:
                 try:
                     randomTweetInfo = self._api.get_status(id = self._tweetId, tweet_mode = "extended")
-                    self._author = getTweetAuthor(randomTweetInfo)
+                    self._author = util.parseTweet.getTweetAuthor(randomTweetInfo)
                     if isTypeImage:
-                        self._mediaUrl = getTweetMedia(randomTweetInfo)
+                        self._mediaUrl = util.parseTweet.getTweetMedia(randomTweetInfo)
                     self._tweetUrl = f"https://twitter.com/i/web/status/{self._tweetId}"
-                    self._text = getTweetText(randomTweetInfo)
+                    self._text = util.parseTweet.getTweetText(randomTweetInfo)
                     if ((not self._author) or (not self._mediaUrl and isTypeImage)): #if they return an empty string
-                        appendId(self._tweetId)
+                        util.used.appendId(self._tweetId)
                         continue
                 except tweepy.error.TweepError:
-                    appendId(self._tweetId)
+                    util.used.appendId(self._tweetId)
                     continue
-                appendId(self._tweetId)
+                util.used.appendId(self._tweetId)
                 break
