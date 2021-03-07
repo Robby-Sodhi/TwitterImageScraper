@@ -17,5 +17,5 @@ def getTweetText(tweetObject):
         try:
             data = tweetObject.text
         except AttributeError:
-            raise ValueError("text/Full_text missing")
+            return ""
     return data
