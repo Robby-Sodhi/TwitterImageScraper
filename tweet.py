@@ -29,6 +29,7 @@ class Tweet():
         if value is None:
           raise ValueError(f'Value {attr} is None')
         return value
+    raise ValueError("Attribute doesn't exist or is private")
       #return getattr(self, attr)
     def randomTweet(self, type=None):
         isTypeImage = (type == "image")
