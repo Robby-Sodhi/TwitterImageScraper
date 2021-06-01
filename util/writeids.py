@@ -2,7 +2,6 @@ import tweepy
 import datetime
 
 import util
-#from fileStuff import writeMasterIds, readMasterId
 
 
 def parseDate(date):
@@ -13,7 +12,7 @@ def today():
     return ((datetime.date.today()).strftime("%Y%m%d%H%M"))
 
 def getLastMasterIdDate():
-    data = readMasterId()
+    data = util.fileStuff.readMasterId()
     lastDate = list(data.keys())[-1]
     return lastDate
 
@@ -42,4 +41,4 @@ def getTwitterIds(auth, search, EndDate, StartDate=201101012315):
         TweetData.update({formattedDate: tweet.id})
     if not ran:
         raise LookupError("No tweets found")
-    writeMasterIds(TweetData)
+    util.fileStuff.writeMasterIds(TweetData)
