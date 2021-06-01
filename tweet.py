@@ -38,7 +38,7 @@ class Tweet():
                 util.writeids.getTwitterIds(self._auth, self._search_query, EndDate=today())
                 continue
             elif util.used.isAllUsed():
-                util.writeids.getTwitterIds(self._auth, self._search_query, EndDate=getLastMasterIdDate())
+                util.writeids.getTwitterIds(self._auth, self._search_query, EndDate=util.writeids.getLastMasterIdDate())
                 continue
 
             self._tweets = util.fileStuff.readMasterId()
